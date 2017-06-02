@@ -801,6 +801,26 @@ b",
     t!(h.borrow().perform());
 }
 
+#[test]
+fn test_upkeep() {
+    let s = Server::new();
+    s.receive(
+        "\
+         GET / HTTP/1.1\r\n\
+         Host: 127.0.0.1:$PORT\r\n\
+         Accept: */*\r\n\
+         \r\n",
+    );
+    s.send("HTTP/1.1 200 OK\r\n\r\n");
+
+    let mut handle = handle();
+    t!(handle.url(&s.url("/")));
+    t!(handle.perform());
+
+    // Ensure that upkeep can be called on the handle without problem.
+    t!(handle.upkeep());
+}
+
 #[cfg(not(windows))]
 #[test]
 fn check_unix_socket() {
