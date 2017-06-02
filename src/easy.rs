@@ -206,7 +206,7 @@ pub enum IpResolve {
 
 /// Possible values to pass to the `http_version` method.
 pub enum HttpVersion {
-    /// We don't care what http version to use, and we'd like the library to 
+    /// We don't care what http version to use, and we'd like the library to
     /// choose the best possible for us.
     Any = curl_sys::CURL_HTTP_VERSION_NONE as isize,
 
@@ -2312,7 +2312,7 @@ impl Easy {
 
     /// Get total time of previous transfer
     ///
-    /// Returns the total time for the previous transfer, 
+    /// Returns the total time for the previous transfer,
     /// including name resolving, TCP connect etc.
     ///
     /// Corresponds to `CURLINFO_TOTAL_TIME` and may return an error if the
@@ -2322,9 +2322,9 @@ impl Easy {
             .map(double_seconds_to_duration)
     }
 
-    /// Get the name lookup time 
+    /// Get the name lookup time
     ///
-    /// Returns the total time from the start 
+    /// Returns the total time from the start
     /// until the name resolving was completed.
     ///
     /// Corresponds to `CURLINFO_NAMELOOKUP_TIME` and may return an error if the
@@ -2334,10 +2334,10 @@ impl Easy {
             .map(double_seconds_to_duration)
     }
 
-    /// Get the time until connect 
+    /// Get the time until connect
     ///
-    /// Returns the total time from the start 
-    /// until the connection to the remote host (or proxy) was completed. 
+    /// Returns the total time from the start
+    /// until the connection to the remote host (or proxy) was completed.
     ///
     /// Corresponds to `CURLINFO_CONNECT_TIME` and may return an error if the
     /// option isn't supported.
@@ -2346,13 +2346,13 @@ impl Easy {
             .map(double_seconds_to_duration)
     }
 
-    /// Get the time until the SSL/SSH handshake is completed 
+    /// Get the time until the SSL/SSH handshake is completed
     ///
     /// Returns the total time it took from the start until the SSL/SSH
-    /// connect/handshake to the remote host was completed. This time is most often 
-    /// very near to the `pretransfer_time` time, except for cases such as 
-    /// HTTP pipelining where the pretransfer time can be delayed due to waits in 
-    /// line for the pipeline and more. 
+    /// connect/handshake to the remote host was completed. This time is most often
+    /// very near to the `pretransfer_time` time, except for cases such as
+    /// HTTP pipelining where the pretransfer time can be delayed due to waits in
+    /// line for the pipeline and more.
     ///
     /// Corresponds to `CURLINFO_APPCONNECT_TIME` and may return an error if the
     /// option isn't supported.
@@ -2361,13 +2361,13 @@ impl Easy {
             .map(double_seconds_to_duration)
     }
 
-    /// Get the time until the file transfer start 
+    /// Get the time until the file transfer start
     ///
-    /// Returns the total time it took from the start until the file 
-    /// transfer is just about to begin. This includes all pre-transfer commands 
-    /// and negotiations that are specific to the particular protocol(s) involved. 
-    /// It does not involve the sending of the protocol- specific request that 
-    /// triggers a transfer. 
+    /// Returns the total time it took from the start until the file
+    /// transfer is just about to begin. This includes all pre-transfer commands
+    /// and negotiations that are specific to the particular protocol(s) involved.
+    /// It does not involve the sending of the protocol- specific request that
+    /// triggers a transfer.
     ///
     /// Corresponds to `CURLINFO_PRETRANSFER_TIME` and may return an error if the
     /// option isn't supported.
@@ -2376,11 +2376,11 @@ impl Easy {
             .map(double_seconds_to_duration)
     }
 
-    /// Get the time until the first byte is received 
+    /// Get the time until the first byte is received
     ///
-    /// Returns the total time it took from the start until the first 
-    /// byte is received by libcurl. This includes `pretransfer_time` and 
-    /// also the time the server needs to calculate the result. 
+    /// Returns the total time it took from the start until the first
+    /// byte is received by libcurl. This includes `pretransfer_time` and
+    /// also the time the server needs to calculate the result.
     ///
     /// Corresponds to `CURLINFO_STARTTRANSFER_TIME` and may return an error if the
     /// option isn't supported.
@@ -2391,9 +2391,9 @@ impl Easy {
 
     /// Get the time for all redirection steps
     ///
-    /// Returns the total time it took for all redirection steps 
-    /// include name lookup, connect, pretransfer and transfer before final 
-    /// transaction was started. `redirect_time` contains the complete 
+    /// Returns the total time it took for all redirection steps
+    /// include name lookup, connect, pretransfer and transfer before final
+    /// transaction was started. `redirect_time` contains the complete
     /// execution time for multiple redirections.
     ///
     /// Corresponds to `CURLINFO_REDIRECT_TIME` and may return an error if the
@@ -2583,6 +2583,15 @@ impl Easy {
             self.cvt(curl_sys::curl_easy_perform(self.handle))
         };
         self.data.running.set(false);
+        panic::propagate();
+        return ret
+    }
+
+    /// Do housekeeping function.
+    pub fn housekeeping(&self) -> Result<(), Error> {
+        let ret = unsafe {
+            self.cvt(curl_sys::curl_easy_housekeeping(self.handle))
+        };
         panic::propagate();
         return ret
     }
@@ -3396,6 +3405,11 @@ impl<'easy, 'data> Transfer<'easy, 'data> {
 
     /// Same as `Easy::transfer`.
     pub fn perform(&self) -> Result<(), Error> {
+        self.easy.do_perform()
+    }
+
+    /// Same as `Easy::housekeeping`.
+    pub fn housekeeping(&self) -> Result<(), Error> {
         self.easy.do_perform()
     }
 

@@ -608,7 +608,7 @@ pub const CURL_IPRESOLVE_V6: c_int = 2;
 
 /// These enums are for use with the CURLOPT_HTTP_VERSION option.
 ///
-/// Setting this means we don't care, and that we'd like the library to choose 
+/// Setting this means we don't care, and that we'd like the library to choose
 /// the best possible for us!
 pub const CURL_HTTP_VERSION_NONE: c_int = 0;
 /// Please use HTTP 1.0 in the request
@@ -999,6 +999,7 @@ extern {
                           buffer: *const c_void,
                           buflen: size_t,
                           n: *mut size_t) -> CURLcode;
+    pub fn curl_easy_housekeeping(curl: *mut CURL) -> CURLcode;
 
     pub fn curl_multi_init() -> *mut CURLM;
     pub fn curl_multi_add_handle(multi_handle: *mut CURLM,
