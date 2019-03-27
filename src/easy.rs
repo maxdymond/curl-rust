@@ -2590,7 +2590,7 @@ impl Easy {
     /// Do housekeeping function.
     pub fn housekeeping(&self) -> Result<(), Error> {
         let ret = unsafe {
-            self.cvt(curl_sys::curl_easy_housekeeping(self.handle))
+            self.cvt(curl_sys::curl_easy_upkeep(self.handle))
         };
         panic::propagate();
         return ret
@@ -3410,7 +3410,7 @@ impl<'easy, 'data> Transfer<'easy, 'data> {
 
     /// Same as `Easy::housekeeping`.
     pub fn housekeeping(&self) -> Result<(), Error> {
-        self.easy.do_perform()
+        self.easy.housekeeping()
     }
 
     /// Same as `Easy::unpause_read`.
