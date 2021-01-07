@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["curl"] = [{"text":"impl Copy for ProxyType","synthetic":false,"types":[]},{"text":"impl Copy for TimeCondition","synthetic":false,"types":[]},{"text":"impl Copy for IpResolve","synthetic":false,"types":[]},{"text":"impl Copy for HttpVersion","synthetic":false,"types":[]},{"text":"impl Copy for SslVersion","synthetic":false,"types":[]},{"text":"impl Copy for SeekResult","synthetic":false,"types":[]},{"text":"impl Copy for InfoType","synthetic":false,"types":[]},{"text":"impl Copy for NetRc","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["curl"] = [{"text":"impl Drop for Form","synthetic":false,"types":[]},{"text":"impl&lt;'easy, 'data&gt; Drop for Transfer&lt;'easy, 'data&gt;","synthetic":false,"types":[]},{"text":"impl&lt;H&gt; Drop for Easy2&lt;H&gt;","synthetic":false,"types":[]},{"text":"impl Drop for List","synthetic":false,"types":[]},{"text":"impl Drop for Multi","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

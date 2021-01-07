@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["curl"] = [{"text":"impl Error for Error","synthetic":false,"types":[]},{"text":"impl Error for ShareError","synthetic":false,"types":[]},{"text":"impl Error for MultiError","synthetic":false,"types":[]},{"text":"impl Error for FormError","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

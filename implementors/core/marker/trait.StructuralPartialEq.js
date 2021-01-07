@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["curl"] = [{"text":"impl StructuralPartialEq for Error","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for ShareError","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for MultiError","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for FormError","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

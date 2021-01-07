@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["curl"] = [{"text":"impl PartialEq&lt;Error&gt; for Error","synthetic":false,"types":[]},{"text":"impl PartialEq&lt;ShareError&gt; for ShareError","synthetic":false,"types":[]},{"text":"impl PartialEq&lt;MultiError&gt; for MultiError","synthetic":false,"types":[]},{"text":"impl PartialEq&lt;FormError&gt; for FormError","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
